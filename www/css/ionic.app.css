@@ -9088,3 +9088,9 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.scroll-content {
+  background: #ECF0F1; }
+
+.bar.bar-stable .title {
+  color: #fff; }
