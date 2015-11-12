@@ -35,7 +35,7 @@ myapp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('/', {
     url: '/',
     abstract: true,
-    templateUrl: 'views/tabs.html'
+    templateUrl: 'views/template/tabs.html'
   })
 
   .state('views/landing', {
