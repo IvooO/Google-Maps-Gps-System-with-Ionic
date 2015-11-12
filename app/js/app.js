@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var myapp = angular.module('starter', ['ionic'])
+var myapp = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
 myapp.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -32,10 +32,10 @@ myapp.config(function($stateProvider, $urlRouterProvider) {
 
 
   // setup an abstract state for the tabs directive
-  $stateProvider.state('/', {
-    url: '/',
+  $stateProvider.state('tab', {
+    url: '/tab',
     abstract: true,
-    templateUrl: 'views/template/tabs.html'
+    templateUrl: 'views/templates/tabs.html'
   })
 
   .state('views/landing', {
@@ -48,24 +48,16 @@ myapp.config(function($stateProvider, $urlRouterProvider) {
     }
   })
 
-  // .state('takepic', {
-  //   url: "/views/takepic",
-  //   views: {
-  //     'home': {
-  //       templateUrl: "views/takingPic.html"
-  //     }
-  //   }
-  // })
+  .state('route', {
+    url: "/views/route",
+    views: {
+      'home': {
+        templateUrl: "views/routes.html"
+      }
+    }
+  })
 
-  // .state('play', {
-  //   url: "/views/play",
-  //   views: {
-  //     'home': {
-  //       templateUrl: "views/play.html",
-  //       controller: "PlayCtrl"
-  //     }
-  //   }
-  // })
+  
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('views/landing');
