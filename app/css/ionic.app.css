@@ -9094,3 +9094,8 @@ a.button {
 
 .bar.bar-stable .title {
   color: pink; }
+
+#map {
+  position: absolute;
+  width: 100%;
+  height: 100%; }
