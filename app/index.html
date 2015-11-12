@@ -31,26 +31,25 @@
 
   </head>
   <body ng-app="starter">
+    <ion-pane>
+      <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+      </ion-nav-bar>
+      
+      <!-- landing.html -->
+      <ion-nav-view name="home"></ion-nav-view>
+      <!-- routes.html -->
+      <ion-nav-view name="route"></ion-nav-view>
 
-    <ion-nav-bar class="bar-positive">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
-    </ion-nav-bar>
-    
-    <ion-nav-view name="home"></ion-nav-view>
-    <ion-nav-view name="route"></ion-nav-view>
-
-    <ion-nav-view></ion-nav-view>
-
-    <div>
-    <ion-tabs class="tabs-icon-top tabs-color-active-positive">
-       <!-- Instruction Tab -->
-    <ion-tab title="Instruction" icon-off="ion-ios-list" icon-on="ion-ios-list-outline" >
-       <ion-nav-view name="tab-dash"></ion-nav-view>
-       </ion-tab>
-     </ion-tabs>
-
-
-    </div>
+      <div>
+      <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+         <!-- Instruction Tab-->
+      <ion-tab title="Instruction" icon-off="ion-ios-list" icon-on="ion-ios-list-outline" >
+         <ion-nav-view name="tab-dash"></ion-nav-view>
+         </ion-tab>
+      </ion-tabs>
+      </div>
+    </ion-pane>
   </body>
 </html>
