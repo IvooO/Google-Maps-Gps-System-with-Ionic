@@ -1,12 +1,14 @@
 {
   "name": "onmyway3",
   "app_id": "",
+  "documentRoot": "app",
+
   "gulpStartupTasks": [
     "sass",
     "watch"
   ],
   "watchPatterns": [
-    "www/**/*",
-    "!www/lib/**/*"
+    "app/**/*",
+    "!app/lib/**/*"
   ]
 }
