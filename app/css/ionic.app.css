@@ -9092,8 +9092,8 @@ a.button {
 .scroll-content {
   background: #ECF0F1; }
 
-.bar.bar-stable .title {
-  color: pink; }
+.scroll {
+  height: 100%; }
 
 #map {
   position: absolute;
