@@ -2,9 +2,7 @@
 /*
 To customize the look and feel of Ionic, you can override the variables
 in ionic's _variables.scss file.
-
 For example, you might change some of the default colors:
-
 $light:                           #fff !default;
 $stable:                          #f8f8f8 !default;
 $positive:                        #387ef5 !default;
@@ -9093,4 +9091,4 @@ a.button {
   background: #ECF0F1; }
 
 .bar.bar-stable .title {
-  color: #fff; }
+  color: pink; }
