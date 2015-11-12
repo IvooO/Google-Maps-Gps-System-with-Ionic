@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var myapp = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
+var myapp = angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 
 myapp.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -43,7 +43,7 @@ myapp.config(function($stateProvider, $urlRouterProvider) {
     views: {
       'home': {
         templateUrl: "views/landing.html",
-        controller: 'LandingCtrl'
+        controller: 'mapController'
       }
     }
   })

@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+    <title>OnMyWay</title>
+    <script 
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2FcL5tXBXHDUsL7CvVK3OChhMUnVfagY">
+    </script>
 
   <!--   <link href="lib/ionic/css/ionic.css" rel="stylesheet">
 
@@ -21,6 +24,7 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="controllers/mapCtrl.js"></script>
     <script src="js/services.js"></script>
 
   </head>
@@ -31,7 +35,7 @@
       </ion-nav-back-button>
     </ion-nav-bar>
     
-    <div ng-controller="LandingCtrl">
+    <div>
       <ion-nav-view name="home"></ion-nav-view>
       <ion-nav-view name="route"></ion-nav-view>
     </div>
@@ -39,26 +43,8 @@
     <ion-nav-view></ion-nav-view>
 
     <div>
-      <ion-tabs class="tabs-icon-top tabs-color-active-positive">
-        <!-- Instruction Tab -->
-        <ion-tab ng-controller="ModalCtrl" ng-click="openModal()" title="Instruction" icon-off="ion-ios-list" icon-on="ion-ios-list-outline" >
-        <ion-nav-view name="tab-dash"></ion-nav-view>
-        </ion-tab>
-      </ion-tabs>
+  
 
-      <script id="tab-instruction.html" type="text/ng-template">
-        <div class="modal">
-          <ion-modal-view>
-            <ion-header-bar>
-              <h1>OnYourWay?</h1>
-            </ion-header-bar>
-            <ion-content>
-              <p>1. Find a destination on your route</p>
-              <button class="button button-full button-energized" ng-click="closeModal()">Done</button>
-            </ion-content>
-          </ion-modal-view>
-        </div>
-      </script>
 
     </div>
   </body>

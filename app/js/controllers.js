@@ -3,13 +3,13 @@ var myapp = angular.module('starter.controllers', []);
 //==================================== LandingCtrl ====================================
 //==================================================================================
 
-myapp.controller('LandingCtrl', function($scope, $cordovaCamera,$ionicPlatform) {
-  console.log("This is LandingCtrl");
-  $ionicPlatform.ready(function() {
+// myapp.controller('LandingCtrl', function($scope, $cordovaCamera,$ionicPlatform) {
+//   console.log("This is LandingCtrl");
+//   $ionicPlatform.ready(function() {
 
    
-  })
-})
+//   })
+// })
 
 
 myapp.controller('PlayCtrl', function($scope, $cordovaCamera,$ionicPlatform) {
