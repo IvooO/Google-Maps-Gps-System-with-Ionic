@@ -9095,6 +9095,9 @@ a.button {
 .scroll {
   height: 100%; }
 
+#searchWrap {
+  transition: all 2.5s ease-in-out; }
+
 #map {
   position: absolute;
   width: 100%;
@@ -9104,6 +9107,9 @@ a.button {
   position: absolute;
   width: 100%;
   top: 20px; }
+
+.mapSmall {
+  width: 11.5%; }
 
 .controls {
   margin-top: 10px;

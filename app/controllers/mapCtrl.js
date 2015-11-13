@@ -12,6 +12,7 @@ myapp.controller("mapController", function($scope){
 	$scope.directionsDisplay.setMap($scope.map);
  	$scope.start = document.getElementById('start');
  	$scope.end = document.getElementById('end');
+	$scope.searchWrap = document.getElementById('searchWrap')
 
 //auto complete service on input fields  =====================
 	$scope.autocomplete = new google.maps.places.Autocomplete($scope.start);
@@ -40,6 +41,9 @@ myapp.controller("mapController", function($scope){
 	    if (status === google.maps.DirectionsStatus.OK) {
 	      directionsDisplay.setDirections(response);
 	      console.log("response",response)
+
+	      $scope.mapSmall = true
+	      $scope.$apply()
 	    }
 	});
 	}

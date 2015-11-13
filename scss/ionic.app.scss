@@ -28,7 +28,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .scroll {
     height: 100%;
 }
-
+#searchWrap{
+  transition: all 2.5s ease-in-out;
+}
 #map{
 	position:absolute;
 	width:100%;
@@ -40,7 +42,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	width: 100%;
 	top: 20px;
 }
-
+.mapSmall{
+	width:11.5%;
+}
 .controls {
   margin-top: 10px;
   border: 1px solid transparent;
