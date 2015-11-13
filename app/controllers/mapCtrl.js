@@ -21,11 +21,19 @@ myapp.controller("mapController", function($scope){
  	document.getElementById('start').addEventListener('change', $scope.onChangeHandler);
 	document.getElementById('end').addEventListener('change', $scope.onChangeHandler);
 
+ // var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
+ //  	origin_autocomplete.bindTo('bounds', map);
+ //  	var destination_autocomplete =
+ //      new google.maps.places.Autocomplete(destination_input);
+ //  	destination_autocomplete.bindTo('bounds', map);
+
   $scope.calculateAndDisplayRoute = function(directionsService, directionsDisplay) {
   	var o = document.getElementById('start').value;
 	var d = document.getElementById('end').value;
 	$scope.orgin = o;
 	$scope.destination = d;
+
+
 
   	$scope.directionsService.route({
     	origin: $scope.orgin,
