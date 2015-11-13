@@ -14,9 +14,11 @@
 		      </label>
     	</div>
 	</div>
-  <div ng-show="response" class="inputBackBtn">
-  </div>
 
+	<button class="button button-positive" id="reloadBtn" ng-show="response" ng-click="reloadRoute()">
+      <i class="icon ion-ios-reload"></i>
+    </button>
+ 	
     <div id="map">
     </div>
   </ion-content>

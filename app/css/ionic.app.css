@@ -9138,6 +9138,17 @@ a.button {
 #destination-input:focus {
   border-color: #4d90fe; }
 
+.mapSmall {
+  display: block; }
+
+#reloadBtn {
+  color: #fff;
+  height: 50px;
+  top: 85px;
+  left: 50px;
+  position: absolute;
+  z-index: 9999; }
+
 #mode-selector {
   color: #fff;
   background-color: #4d90fe;

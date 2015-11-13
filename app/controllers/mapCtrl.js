@@ -30,6 +30,9 @@ myapp.controller("mapController", function($scope){
   		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay)   
   	});
 
+   	$scope.reloadRoute = function(){
+   		window.location.reload();
+   	}
 	$scope.calculateAndDisplayRoute = function(directionsService, directionsDisplay) {
 		$scope.orgin = $scope.start.value;
 		$scope.destination = $scope.end.value;
@@ -45,7 +48,6 @@ myapp.controller("mapController", function($scope){
 
 	      $scope.response = response;
 
-	      $scope.mapSmall = true
 	      $scope.$apply()
 	    }
 	});
