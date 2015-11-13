@@ -2,50 +2,46 @@
 // var myapp = angular.module('starter', ['ionic'])
 
 myapp.controller("mapController", function($scope){
-//display the map
+//display the map ============================================
 	$scope.directionsService = new google.maps.DirectionsService;
  	$scope.directionsDisplay = new google.maps.DirectionsRenderer;
  	$scope.map = new google.maps.Map(document.getElementById('map'), {
     	zoom: 7,
     	center: {lat: 41.85, lng: -87.65}
   	});
-
 	$scope.directionsDisplay.setMap($scope.map);
+ 	$scope.start = document.getElementById('start');
+ 	$scope.end = document.getElementById('end');
+
+//auto complete service on input fields  =====================
+	$scope.autocomplete = new google.maps.places.Autocomplete($scope.start);
+	$scope.autocomplete1 = new google.maps.places.Autocomplete($scope.end);
 
 
-	$scope.onChangeHandler = function() {
-    	$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay);
-    	console.log("finding location")
-	};
+//listen to the autocomplete event       =====================
+   	$scope.autocomplete.addListener('place_changed', function() {
+   		console.log("place changed ")
+		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay)   
+  	});
 
- 	document.getElementById('start').addEventListener('change', $scope.onChangeHandler);
-	document.getElementById('end').addEventListener('change', $scope.onChangeHandler);
+   	$scope.autocomplete1.addListener('place_changed', function() {
+   		console.log("place changed ")
+  		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay)   
+  	});
 
- // var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
- //  	origin_autocomplete.bindTo('bounds', map);
- //  	var destination_autocomplete =
- //      new google.maps.places.Autocomplete(destination_input);
- //  	destination_autocomplete.bindTo('bounds', map);
-
-  $scope.calculateAndDisplayRoute = function(directionsService, directionsDisplay) {
-  	var o = document.getElementById('start').value;
-	var d = document.getElementById('end').value;
-	$scope.orgin = o;
-	$scope.destination = d;
-
-
-
-  	$scope.directionsService.route({
-    	origin: $scope.orgin,
-    	destination: $scope.destination,
-    	travelMode: google.maps.TravelMode.DRIVING
-  }, function(response, status) {
-  
-    if (status === google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(response);
-    }
-  });
-}
+	$scope.calculateAndDisplayRoute = function(directionsService, directionsDisplay) {
+		$scope.orgin = $scope.start.value;
+		$scope.destination = $scope.end.value;
+  		$scope.directionsService.route({
+	    	origin: $scope.orgin,
+	    	destination: $scope.destination,
+	    	travelMode: google.maps.TravelMode.DRIVING
+	}, function(response, status) {
+	    if (status === google.maps.DirectionsStatus.OK) {
+	      directionsDisplay.setDirections(response);
+	    }
+	});
+	}
 
 
 })
