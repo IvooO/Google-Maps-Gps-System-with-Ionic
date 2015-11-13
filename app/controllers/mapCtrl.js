@@ -12,6 +12,7 @@ myapp.controller("mapController", function($scope){
 	$scope.directionsDisplay.setMap($scope.map);
  	$scope.start = document.getElementById('start');
  	$scope.end = document.getElementById('end');
+	$scope.searchWrap = document.getElementById('searchWrap')
 
 //auto complete service on input fields  =====================
 	$scope.autocomplete = new google.maps.places.Autocomplete($scope.start);
@@ -36,12 +37,18 @@ myapp.controller("mapController", function($scope){
 	    	origin: $scope.orgin,
 	    	destination: $scope.destination,
 	    	travelMode: google.maps.TravelMode.DRIVING
-		}, function(response, status) {
-	    	if (status === google.maps.DirectionsStatus.OK) {
-	      		directionsDisplay.setDirections(response);
-	      		console.log(response);
-	    	}
-		});
+
+	}, function(response, status) {
+	    if (status === google.maps.DirectionsStatus.OK) {
+	      directionsDisplay.setDirections(response);
+	      console.log("response",response)
+
+	      $scope.response = response;
+
+	      $scope.mapSmall = true
+	      $scope.$apply()
+	    }
+	});
 	}
 
 })
