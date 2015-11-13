@@ -21,6 +21,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "app/lib/ionic/scss/ionic";
 
+.inputBackBtn{
+  background-color:green;
+  width:100px;
+  height:100px;
+  position:absolute;
+  top: 100px;
+  z-index:10000000;
+}
 .scroll-content {
     background: #ECF0F1;
 }

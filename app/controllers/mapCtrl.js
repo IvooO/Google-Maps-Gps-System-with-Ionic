@@ -36,12 +36,12 @@ myapp.controller("mapController", function($scope){
 	    	origin: $scope.orgin,
 	    	destination: $scope.destination,
 	    	travelMode: google.maps.TravelMode.DRIVING
-	}, function(response, status) {
-	    if (status === google.maps.DirectionsStatus.OK) {
-	      directionsDisplay.setDirections(response);
-	      console.log("response",response)
-	    }
-	});
+		}, function(response, status) {
+	    	if (status === google.maps.DirectionsStatus.OK) {
+	      		directionsDisplay.setDirections(response);
+	      		console.log(response);
+	    	}
+		});
 	}
 
 })
