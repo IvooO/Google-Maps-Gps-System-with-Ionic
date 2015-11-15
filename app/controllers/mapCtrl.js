@@ -1,7 +1,7 @@
 
 // var myapp = angular.module('starter', ['ionic'])
 
-myapp.controller("mapController", function($scope){
+myapp.controller("mapController", function($scope,$timeout){
 //display the map ============================================
 	$scope.directionsService = new google.maps.DirectionsService;
  	$scope.directionsDisplay = new google.maps.DirectionsRenderer;
@@ -24,6 +24,15 @@ myapp.controller("mapController", function($scope){
    		console.log("place changed ")
 		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay)   
   	});
+
+  	$timeout(function(){
+	var predictionContainer = angular.element(document.getElementsByClassName('pac-container'));
+	predictionContainer.attr('data-tap-disabled', true);
+	predictionContainer.css('pointer-events', 'auto');
+	predictionContainer.bind('click', function(){
+		element.find('input')[0].blur();
+	});
+}, 100);
 
    	$scope.autocomplete1.addListener('place_changed', function() {
    		console.log("place changed ")
