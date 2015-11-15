@@ -15,20 +15,9 @@ myapp.controller("mapController", function($scope){
 	$scope.searchWrap = document.getElementById('searchWrap')
 
 //auto complete service on input fields  =====================
-	$scope.autocomplete = new google.maps.places.Autocomplete($scope.start);
-	$scope.autocomplete1 = new google.maps.places.Autocomplete($scope.end);
-
+	
 
 //listen to the autocomplete event       =====================
-   	$scope.autocomplete.addListener('place_changed', function() {
-   		console.log("place changed ")
-		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay)   
-  	});
-
-   	$scope.autocomplete1.addListener('place_changed', function() {
-   		console.log("place changed ")
-  		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay)   
-  	});
 
    	$scope.reloadRoute = function(){
    		window.location.reload();
