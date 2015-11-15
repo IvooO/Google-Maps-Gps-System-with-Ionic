@@ -53,24 +53,4 @@ myapp.controller("mapController", function($scope){
 	});
 	}
 
-
-	myapp.directive('disabletap', function($timeout) {
-  return {
-    link: function() {
-      $timeout(function() {
-        $scope.searchWrap
-        // disable ionic data tab
-        angular.element($scope.searchWrap).attr('data-tap-disabled', 'true');
-        // leave input field if google-address-entry is selected
-        angular.element($scope.searchWrap).on("click", function(){
-            document.getElementById('type-selector').blur();
-        });
-
-      },500);
-
-    }
-  };
-});
- 
-
 })
