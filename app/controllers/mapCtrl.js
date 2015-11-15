@@ -25,19 +25,19 @@ myapp.controller("mapController", function($scope,$timeout){
 		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay)   
   	});
 
-  	$timeout(function(){
-	var predictionContainer = angular.element(document.getElementsByClassName('pac-container'));
-	predictionContainer.attr('data-tap-disabled', true);
-	predictionContainer.css('pointer-events', 'auto');
-	predictionContainer.bind('click', function(){
-		element.find('input')[0].blur();
-	});
-}, 100);
-
    	$scope.autocomplete1.addListener('place_changed', function() {
    		console.log("place changed ")
   		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay)   
   	});
+
+ 	$timeout(function(){
+	var predictionContainer = angular.element(document.getElementsByClassName('pac-container'));
+	predictionContainer.attr('data-tap-disabled', true);
+	// predictionContainer.css('pointer-events', 'auto');
+	predictionContainer.bind('click', function(){
+		element.find('input')[0].blur();
+	});
+}, 100);
 
    	$scope.reloadRoute = function(){
    		window.location.reload();
