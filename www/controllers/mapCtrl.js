@@ -71,7 +71,7 @@ myapp.controller("mapController", function($scope,$timeout){
 
 //Keep track of the current location of the user ====================
 var marker = null;
-function autoUpdate() {
+(function autoUpdate() {
   navigator.geolocation.getCurrentPosition(function(position) {  
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
@@ -95,8 +95,9 @@ function autoUpdate() {
   }); 
 
   // Call the autoUpdate() function every 2 seconds
-  setTimeout(autoUpdate, 2000);
-}
+  setTimeout(autoUpdate, 500);
+})();
+// autoUpdate();
 
 function toggleBounce() {
   if (marker.getAnimation() !== null) {
@@ -105,7 +106,6 @@ function toggleBounce() {
     marker.setAnimation(google.maps.Animation.BOUNCE);
   }
 }
-autoUpdate();
 
 
 })

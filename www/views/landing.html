@@ -5,7 +5,7 @@
     </p> -->
     <div class="list list-inset searchBox-top padding">
 
-    	<div id="searchWrap" ng-hide="response" >
+    	<div id="searchWrap" ng-hide="response">
 		      <label class="item item-input">
 		        <input type="text" id="start" placeholder="From">
 		      </label>
@@ -13,20 +13,17 @@
 		        <input type="text" id="end" placeholder="To">
 		      </label>
     	</div>
-
 	</div>
-
 
 	<button class="button button-positive" id="reloadBtn" ng-show="response" ng-click="reloadRoute()">
       <i class="icon ion-ios-reload"></i>
     </button>
  	
-    <div id="map">
+    <div id="map" data-tap-disabled="true">
     </div>
 
-    <div id="right-panel" ng-show="response">
+     <div id="right-panel" ng-show="response">
 
     </div>
-
   </ion-content>
 </ion-view>
