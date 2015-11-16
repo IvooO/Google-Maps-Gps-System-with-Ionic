@@ -82,6 +82,12 @@ myapp.controller("mapController", function($scope,$timeout){
 
 //define the current position marker =========================
 marker = null;
+
+
+var iconBase = '../img/ionic.png';
+
+console.log(iconBase.src)
+
 //find your location and
 $scope.findLocation = (function(){
   navigator.geolocation.getCurrentPosition(function(position) {
@@ -103,8 +109,8 @@ $scope.findLocation = (function(){
   // Center the map on the new position
   }); 
   // Call the autoUpdate() function every 1/10 seconds
-  setTimeout($scope.findLocation, 100);
-})
+  setTimeout($scope.findLocation, 400);
+})()
 
 function toggleBounce() {
   if (marker.getAnimation() !== null) {
