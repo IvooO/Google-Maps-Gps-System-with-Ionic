@@ -80,7 +80,40 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .mapSmall{
 	display:block;
 }
+#right-panel {
+    position: relative;
+    width: 99%;
+    background: white;
+    top: 181px;
+    z-index: 9999999;
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
 
+
+}
+//routing font
+.adp, .adp table {
+    /* font-family: Roboto,Arial,sans-serif; */
+    font-weight: 300;
+    color: purple;
+    width: 100%;
+}
+#right-panel select, #right-panel input {
+  font-size: 15px;
+}
+
+#right-panel select {
+  width: 100%;
+}
+
+#right-panel i {
+  font-size: 12px;
+}
+
+      .panel {
+        height: 100%;
+        overflow: auto;
+      }
 #reloadBtn{
    
     color: #fff;

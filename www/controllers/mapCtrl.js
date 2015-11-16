@@ -4,7 +4,11 @@
 myapp.controller("mapController", function($scope,$timeout){
 //display the map ============================================
 	$scope.directionsService = new google.maps.DirectionsService;
- 	$scope.directionsDisplay = new google.maps.DirectionsRenderer;
+ 	$scope.directionsDisplay = new google.maps.DirectionsRenderer({
+	    draggable: true,
+	    map: map,
+	    panel: document.getElementById('right-panel')
+  	});
  	$scope.map = new google.maps.Map(document.getElementById('map'), {
     	zoom: 7,
     	center: {lat: 41.85, lng: -87.65}
@@ -43,11 +47,11 @@ myapp.controller("mapController", function($scope,$timeout){
    		window.location.reload();
    	}
 	$scope.calculateAndDisplayRoute = function(directionsService, directionsDisplay) {
-		$scope.orgin = $scope.start.value;
-		$scope.destination = $scope.end.value;
-  		$scope.directionsService.route({
-	    	origin: $scope.orgin,
-	    	destination: $scope.destination,
+		orgin = $scope.start.value;
+		destination = $scope.end.value;
+  		directionsService.route({
+	    	origin: orgin,
+	    	destination: destination,
 	    	travelMode: google.maps.TravelMode.DRIVING
 
 	}, function(response, status) {
@@ -61,4 +65,5 @@ myapp.controller("mapController", function($scope,$timeout){
 	    }
 	});
 	}
+
 })
