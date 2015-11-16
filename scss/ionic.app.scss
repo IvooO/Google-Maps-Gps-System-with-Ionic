@@ -19,7 +19,7 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "app/lib/ionic/scss/ionic";
+@import "www/lib/ionic/scss/ionic";
 
 .inputBackBtn{
   background-color:green;
@@ -28,6 +28,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   position:absolute;
   top: 100px;
   z-index:10000000;
+}
+.pac-container{
+  pointer-events:auto; 
 }
 .scroll-content {
     background: #ECF0F1;

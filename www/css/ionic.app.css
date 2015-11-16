@@ -9097,6 +9097,9 @@ a.button {
   top: 100px;
   z-index: 10000000; }
 
+.pac-container {
+  pointer-events: auto; }
+
 .scroll-content {
   background: #ECF0F1; }
 
