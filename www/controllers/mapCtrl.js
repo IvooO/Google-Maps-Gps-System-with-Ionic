@@ -78,32 +78,33 @@ myapp.controller("mapController", function($scope,$timeout){
 	    }
 	});
 	}
-//find your location and route =============
-$scope.findLocation = function(){
+
+
+//define the current position marker =========================
+marker = null;
+//find your location and
+$scope.findLocation = (function(){
   navigator.geolocation.getCurrentPosition(function(position) {
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
-
-
-     marker = new google.maps.Marker({
+    if (marker != null) {
+      // Marker already created - Move it
+      marker.setPosition(newPoint);
+    }else{
+    	marker = new google.maps.Marker({
         position: newPoint,
         map: $scope.map,
         title: 'Current Position'
       });
-      marker.addListener('click', toggleBounce);
-
-    if (marker) {
-      // Marker already created - Move it
-      marker.setPosition(newPoint);
-      $scope.map.setCenter(newPoint);
-
+       $scope.map.setCenter(newPoint);
     }
+    marker.addListener('click', toggleBounce);
+
     // Center the map on the new position
   }); 
-
-  // Call the autoUpdate() function every 2 seconds
+  // Call the autoUpdate() function every half seconds
   setTimeout($scope.findLocation, 500);
-}
+})
 // autoUpdate();
 
 function toggleBounce() {
