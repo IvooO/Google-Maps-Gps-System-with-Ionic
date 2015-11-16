@@ -90,6 +90,7 @@ $scope.findLocation = (function(){
     if (marker != null) {
       // Marker already created - Move it
       marker.setPosition(newPoint);
+      $scope.map.setCenter(newPoint);
     }else{
     	marker = new google.maps.Marker({
         position: newPoint,
@@ -97,15 +98,13 @@ $scope.findLocation = (function(){
         title: 'Current Position'
       });
        $scope.map.setCenter(newPoint);
+       marker.addListener('click', toggleBounce);
     }
-    marker.addListener('click', toggleBounce);
-
-    // Center the map on the new position
+  // Center the map on the new position
   }); 
-  // Call the autoUpdate() function every half seconds
-  setTimeout($scope.findLocation, 500);
+  // Call the autoUpdate() function every 1/10 seconds
+  setTimeout($scope.findLocation, 100);
 })
-// autoUpdate();
 
 function toggleBounce() {
   if (marker.getAnimation() !== null) {
