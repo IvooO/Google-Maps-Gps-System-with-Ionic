@@ -9180,6 +9180,14 @@ a.button {
   position: absolute;
   z-index: 9999; }
 
+#reloadBtn1 {
+  color: #fff;
+  height: 50px;
+  top: 150px;
+  left: 15px;
+  position: absolute;
+  z-index: 9999; }
+
 #mode-selector {
   color: #fff;
   background-color: #4d90fe;

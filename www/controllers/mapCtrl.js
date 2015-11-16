@@ -16,6 +16,11 @@ myapp.controller("mapController", function($scope,$timeout){
 
   	});
 	$scope.directionsDisplay.setMap($scope.map);
+
+
+	var stepDisplay = new google.maps.InfoWindow;
+  	var markerArray = [];
+
  	$scope.start = document.getElementById('start');
  	$scope.end = document.getElementById('end');
 	$scope.searchWrap = document.getElementById('searchWrap')
@@ -28,12 +33,12 @@ myapp.controller("mapController", function($scope,$timeout){
 //listen to the autocomplete event       =====================
    	$scope.autocomplete.addListener('place_changed', function() {
    		console.log("place changed ")
-		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay)   
+		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay, markerArray, stepDisplay, map)   
   	});
 
    	$scope.autocomplete1.addListener('place_changed', function() {
    		console.log("place changed ")
-  		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay)   
+  		$scope.calculateAndDisplayRoute($scope.directionsService, $scope.directionsDisplay, markerArray, stepDisplay, map)   
   	});
 
  	$timeout(function(){
@@ -49,7 +54,10 @@ myapp.controller("mapController", function($scope,$timeout){
    		window.location.reload();
    	}
 
-	$scope.calculateAndDisplayRoute = function(directionsService, directionsDisplay) {
+	$scope.calculateAndDisplayRoute = function(directionsService, directionsDisplay,markerArray, stepDisplay, map) {
+		 for (var i = 0; i < markerArray.length; i++) {
+    		markerArray[i].setMap(null);
+  		}
 		orgin = $scope.start.value;
 		destination = $scope.end.value;
   		directionsService.route({
@@ -60,6 +68,8 @@ myapp.controller("mapController", function($scope,$timeout){
 	}, function(response, status) {
 	    if (status === google.maps.DirectionsStatus.OK) {
 	      directionsDisplay.setDirections(response);
+	      showSteps(response, markerArray, stepDisplay, map);
+
 	      console.log("response",response)
 
 	      $scope.response = response;
@@ -68,35 +78,32 @@ myapp.controller("mapController", function($scope,$timeout){
 	    }
 	});
 	}
-
-//Keep track of the current location of the user ====================
-var marker = null;
-(function autoUpdate() {
-  navigator.geolocation.getCurrentPosition(function(position) {  
+//find your location and route =============
+$scope.findLocation = function(){
+  navigator.geolocation.getCurrentPosition(function(position) {
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
-    if (marker) {
-      // Marker already created - Move it
-      marker.setPosition(newPoint);
-    }
-    else {
-      // Marker does not exist - Create it
-      marker = new google.maps.Marker({
+
+
+     marker = new google.maps.Marker({
         position: newPoint,
-        animation: google.maps.Animation.DROP,
         map: $scope.map,
         title: 'Current Position'
       });
-        marker.addListener('click', toggleBounce);
+      marker.addListener('click', toggleBounce);
+
+    if (marker) {
+      // Marker already created - Move it
+      marker.setPosition(newPoint);
+      $scope.map.setCenter(newPoint);
 
     }
     // Center the map on the new position
-    $scope.map.setCenter(newPoint);
   }); 
 
   // Call the autoUpdate() function every 2 seconds
-  setTimeout(autoUpdate, 500);
-})();
+  setTimeout($scope.findLocation, 500);
+}
 // autoUpdate();
 
 function toggleBounce() {
@@ -108,4 +115,27 @@ function toggleBounce() {
 }
 
 
+function showSteps(directionResult, markerArray, stepDisplay, map) {
+  // For each step, place a marker, and add the text to the marker's infowindow.
+  // Also attach the marker to an array so we can keep track of it and remove it
+  // when calculating new routes.
+  var myRoute = directionResult.routes[0].legs[0];
+  for (var i = 0; i < myRoute.steps.length; i++) {
+    var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
+    marker.setMap($scope.map);
+    marker.setPosition(myRoute.steps[i].start_location);
+    attachInstructionText(
+        stepDisplay, marker, myRoute.steps[i].instructions, map);
+  }
+}
+
+function attachInstructionText(stepDisplay, marker, text, map) {
+  google.maps.event.addListener(marker, 'click', function() {
+    // Open an info window when the marker is clicked on, containing the text
+    // of the step.
+    stepDisplay.setContent(text);
+    stepDisplay.open(map, marker);
+  });
+}
+//Keep track of the current location of the user ====================
 })

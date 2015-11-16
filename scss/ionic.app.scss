@@ -110,16 +110,23 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   font-size: 12px;
 }
 
-      .panel {
-        height: 100%;
-        overflow: auto;
-      }
+.panel {
+  height: 100%;
+  overflow: auto;
+}
 #reloadBtn{
-   
     color: #fff;
     height: 50px;
     top: 85px;
     left: 50px;
+    position: absolute;
+    z-index: 9999;
+}
+#reloadBtn1{
+    color: #fff;
+    height: 50px;
+    top: 150px;
+    left: 15px;
     position: absolute;
     z-index: 9999;
 }
