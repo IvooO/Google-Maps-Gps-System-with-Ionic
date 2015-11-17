@@ -10,7 +10,7 @@ myapp.controller("mapController", function($scope,$timeout){
 	    panel: document.getElementById('right-panel')
   	});
  	$scope.map = new google.maps.Map(document.getElementById('map'), {
-    	zoom: 15,
+    	zoom: 18,
     	center: {lat: 41.85, lng: -87.65},
     	mapTypeId: google.maps.MapTypeId.ROADMAP
 
@@ -86,12 +86,10 @@ myapp.controller("mapController", function($scope,$timeout){
 //define the current position marker =========================
 marker = null;
 
-$scope.findLocation = function(){
+$scope.findLocation = (function(){
   navigator.geolocation.getCurrentPosition(function(position) {
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
-
-
 
     console.log("position.coords.latitude",position.coords)
     if (marker != null) {
@@ -113,11 +111,9 @@ $scope.findLocation = function(){
     }
   // Center the map on the new position
   }); 
-
   // Call the autoUpdate() function every 1/10 seconds
-  // setTimeout($scope.findLocation, 5000);
-
-}
+  setTimeout($scope.findLocation, 500);
+})
 
 
 var iconBase = {
