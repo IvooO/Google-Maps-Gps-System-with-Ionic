@@ -47,22 +47,17 @@ myapp.controller("mapController", function($scope,$timeout){
    	}
 
 	$scope.calculateAndDisplayRoute = function(directionsService, directionsDisplay,markerArray, stepDisplay, map) {
+		 for (var i = 0; i < markerArray.length; i++) {
+    		markerArray[i].setMap(null);
+  		}
 
     navigator.geolocation.getCurrentPosition(function(position) {
           var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                                 position.coords.longitude);
-
+          console.log(position.coords)
           $scope.coords = position.coords.latitude + "," + position.coords.longitude
-
-          $scope.newCord = JSON.stringify($scope.coords)
-
-          console.log( $scope.newCord)
-           
-    })
-    for (var i = 0; i < markerArray.length; i++) {
-        markerArray[i].setMap(null);
-      }
-    // console.log($scope.newCord)
+          $scope.newCord = $scope.coords.toString()  
+        // console.log($scope.newCord)
 		start = $scope.newCord;
 		destination = $scope.end.value
   	directionsService.route({
@@ -82,6 +77,7 @@ myapp.controller("mapController", function($scope,$timeout){
 	      $scope.$apply()
 	    }
 	});
+})
 
 
 
@@ -122,7 +118,6 @@ $scope.findLocation = function(){
   // setTimeout($scope.findLocation, 5000);
 
 }
-$scope.findLocation();
 
 
 var iconBase = {
