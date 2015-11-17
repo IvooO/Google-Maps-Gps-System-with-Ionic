@@ -121,13 +121,12 @@ $scope.findLocation = function(map,newPoint){
 
   $scope.directionsDisplay.preserveViewport = true;
 
-  setTimeout($scope.calculateAndDisplayRoute, 2000);
+  setTimeout($scope.calculateAndDisplayRoute, 1000);
 
   navigator.geolocation.getCurrentPosition(function(position) {
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
     $scope.map.setZoom(17)
-
 
     $scope.map.setTilt(20) 
 
@@ -152,7 +151,7 @@ $scope.findLocation = function(map,newPoint){
   // Center the map on the new position
   }); 
   // Call the autoUpdate() function every 1/10 seconds
-  setTimeout($scope.findLocation, 500);
+  setTimeout($scope.findLocation, 1000);
 
 }
 

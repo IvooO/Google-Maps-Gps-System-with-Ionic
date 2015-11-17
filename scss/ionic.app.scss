@@ -89,7 +89,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     position: relative;
     width: 99%;
     background: white;
-    top: 181px;
+    top: 350px;
     z-index: 9999999;
     font-family: 'Roboto','sans-serif';
     line-height: 30px;
@@ -119,6 +119,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   height: 100%;
   overflow: auto;
 }
+#routeIcon{
+ position:absolute;
+ right:80px;
+ top:12px;
+ font-weight:bold;
+}
 #reloadBtn{
     color: #fff;
     height: 50px;
@@ -131,8 +137,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 #reloadBtn1 {
     color: #fff;
     height: 40px;
-    bottom: 10px;
-    left: 17px;
+    top: 0px;
+    right: 17px;
     position: fixed;
     z-index: 99999999999;
 }
