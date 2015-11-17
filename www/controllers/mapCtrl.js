@@ -17,11 +17,13 @@ myapp.controller("mapController", function($scope,$timeout){
     coords: [1, 1, 1, 20, 18, 20, 18, 1],
     type: 'poly'
   };
+
 //instiatiate direction service
   $scope.directionsService = new google.maps.DirectionsService;
   $scope.directionsDisplay = new google.maps.DirectionsRenderer({
       draggable: true,
       map: $scope.map,
+      preserveViewport: false,
       panel: document.getElementById('right-panel')
     });
   $scope.map = new google.maps.Map(document.getElementById('map'), {
@@ -34,7 +36,6 @@ myapp.controller("mapController", function($scope,$timeout){
 
   
  	$scope.end = document.getElementById('end');
-	$scope.searchWrap = document.getElementById('searchWrap')
 
 //auto complete service on input fields  =====================
 	$scope.autocomplete = new google.maps.places.Autocomplete($scope.end);
@@ -88,18 +89,25 @@ myapp.controller("mapController", function($scope,$timeout){
 }
 
 //find your location and
-function toggleBounce() {
-  if (current.getAnimation() !== null) {
-    current.setAnimation(null);
-  } else {
-    current.setAnimation(google.maps.Animation.BOUNCE);
-  }
-}
+// function toggleBounce() {
+//   if (current.getAnimation() !== null) {
+//     current.setAnimation(null);
+//   } else {
+//     current.setAnimation(google.maps.Animation.BOUNCE);
+//   }
+// }
+// current.addListener('click', toggleBounce);
+
 //define the current position marker =========================
-$scope.findLocation = function(){
+$scope.findLocation = function(map,newPoint){
+
+  $scope.directionsDisplay.preserveViewport = true;
+
+
   navigator.geolocation.getCurrentPosition(function(position) {
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
+    $scope.map.setZoom(18)
     if (current != null) {
       // Marker already created - Move it
       current.setPosition(newPoint);
@@ -113,14 +121,16 @@ $scope.findLocation = function(){
         title: 'Current location'
       });
        $scope.map.setCenter(newPoint);
-       current.addListener('click', toggleBounce);
+
+       $scope.map.panTo(current.getPosition());
+       return newPoint;
     }
   // Center the map on the new position
   }); 
   // Call the autoUpdate() function every 1/10 seconds
   setTimeout($scope.findLocation, 100);
-}
 
+}
 
 
 function showSteps(directionResult, markerArray, stepDisplay, map) {

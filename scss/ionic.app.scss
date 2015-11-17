@@ -127,13 +127,20 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     position: absolute;
     z-index: 9999;
 }
-#reloadBtn1{
+
+#reloadBtn1 {
     color: #fff;
-    height: 50px;
-    top: 450px;
-    left: 150px;
-    position: absolute;
+    height: 40px;
+    bottom: 10px;
+    left: 17px;
+    position: fixed;
     z-index: 99999999999;
+}
+.view-container {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 96%;
 }
 #mode-selector {
   color: #fff;
