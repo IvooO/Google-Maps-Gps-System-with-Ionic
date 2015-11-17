@@ -18,6 +18,10 @@ myapp.controller("mapController", function($scope,$timeout){
     type: 'poly'
   };
 
+//model out the current data
+  var d = new Date();
+  console.log(d)
+
 //instiatiate direction service
   $scope.directionsService = new google.maps.DirectionsService;
   $scope.directionsDisplay = new google.maps.DirectionsRenderer({
@@ -36,6 +40,9 @@ myapp.controller("mapController", function($scope,$timeout){
 
   
  	$scope.end = document.getElementById('end');
+
+
+  $scope.end.webkitSpeech = true;
 
 //auto complete service on input fields  =====================
 	$scope.autocomplete = new google.maps.places.Autocomplete($scope.end);
@@ -57,35 +64,46 @@ myapp.controller("mapController", function($scope,$timeout){
    	$scope.reloadRoute = function(){
    		window.location.reload();
    	}
-
+//once routed reload to update the new current location==========================
 	$scope.calculateAndDisplayRoute = function(directionsService, directionsDisplay,markerArray, stepDisplay, map) {
-		 for (var i = 0; i < markerArray.length; i++) {
-    		markerArray[i].setMap(null);
-  		}
+      var markerArray = [];
+     for (var i = 0; i < markerArray.length; i++) {
+            markerArray[i].setMap(null);
+      }
     navigator.geolocation.getCurrentPosition(function(position) {
+          console.log("checking")
           var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                                 position.coords.longitude);
           // console.log(position.coords)
           $scope.coords = position.coords.latitude + "," + position.coords.longitude
-          $scope.newCord = $scope.coords.toString()  
+          $scope.newCord = $scope.coords.toString();
+
         // console.log($scope.newCord)
-		start = $scope.newCord;
-		destination = $scope.end.value
-  	directionsService.route({
+		var start = $scope.newCord;
+		var destination = $scope.end.value;
+
+  	$scope.directionsService.route({
 	    	origin: start,
 	    	destination: destination,
 	    	travelMode: google.maps.TravelMode.DRIVING
-
 	 }, function(response, status) {
 	    if (status === google.maps.DirectionsStatus.OK) {
-	      directionsDisplay.setDirections(response);
+	      $scope.directionsDisplay.setDirections(response);
 	      showSteps(response, markerArray, stepDisplay, map);
 	      // console.log("response",response)
 	      $scope.response = response;
-	      $scope.$apply()
+        $scope.$apply()
 	    }
+      // $scope.fireCheck = function(){
+      //   console.log("fired")
+      //   var timeout = directionsDisplay.setDirections(response);
+      //   setTimeout($scope.fireCheck, 1000);
+      // }
+      // $scope.fireCheck();
 	});
+
 })
+
 }
 
 //find your location and
@@ -103,11 +121,17 @@ $scope.findLocation = function(map,newPoint){
 
   $scope.directionsDisplay.preserveViewport = true;
 
+  setTimeout($scope.calculateAndDisplayRoute, 2000);
 
   navigator.geolocation.getCurrentPosition(function(position) {
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
-    $scope.map.setZoom(18)
+    $scope.map.setZoom(17)
+
+
+    $scope.map.setTilt(20) 
+
+
     if (current != null) {
       // Marker already created - Move it
       current.setPosition(newPoint);
@@ -128,7 +152,7 @@ $scope.findLocation = function(map,newPoint){
   // Center the map on the new position
   }); 
   // Call the autoUpdate() function every 1/10 seconds
-  setTimeout($scope.findLocation, 100);
+  setTimeout($scope.findLocation, 500);
 
 }
 
