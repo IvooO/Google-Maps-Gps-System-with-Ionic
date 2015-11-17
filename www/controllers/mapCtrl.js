@@ -3,23 +3,34 @@
 
 myapp.controller("mapController", function($scope,$timeout){
 //display the map ============================================
-	$scope.directionsService = new google.maps.DirectionsService;
- 	$scope.directionsDisplay = new google.maps.DirectionsRenderer({
-	    draggable: true,
-	    map: $scope.map,
-	    panel: document.getElementById('right-panel')
-  	});
- 	$scope.map = new google.maps.Map(document.getElementById('map'), {
-    	zoom: 18,
-    	center: {lat: 41.85, lng: -87.65},
-    	mapTypeId: google.maps.MapTypeId.ROADMAP
-
-  	});
-	$scope.directionsDisplay.setMap($scope.map);
-
-
 	var stepDisplay = new google.maps.InfoWindow;
   var markerArray = [];
+
+  var current = null;
+
+  var iconBase = {
+      url: 'img/arrow.png',
+      size: new google.maps.Size(30, 32)
+    };
+
+  var shape = {
+    coords: [1, 1, 1, 20, 18, 20, 18, 1],
+    type: 'poly'
+  };
+//instiatiate direction service
+  $scope.directionsService = new google.maps.DirectionsService;
+  $scope.directionsDisplay = new google.maps.DirectionsRenderer({
+      draggable: true,
+      map: $scope.map,
+      panel: document.getElementById('right-panel')
+    });
+  $scope.map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 18,
+      center: {lat: 41.85, lng: -87.65},
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+
+    });
+  $scope.directionsDisplay.setMap($scope.map);
 
   
  	$scope.end = document.getElementById('end');
@@ -50,11 +61,10 @@ myapp.controller("mapController", function($scope,$timeout){
 		 for (var i = 0; i < markerArray.length; i++) {
     		markerArray[i].setMap(null);
   		}
-
     navigator.geolocation.getCurrentPosition(function(position) {
           var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                                 position.coords.longitude);
-          console.log(position.coords)
+          // console.log(position.coords)
           $scope.coords = position.coords.latitude + "," + position.coords.longitude
           $scope.newCord = $scope.coords.toString()  
         // console.log($scope.newCord)
@@ -69,73 +79,48 @@ myapp.controller("mapController", function($scope,$timeout){
 	    if (status === google.maps.DirectionsStatus.OK) {
 	      directionsDisplay.setDirections(response);
 	      showSteps(response, markerArray, stepDisplay, map);
-
-	      console.log("response",response)
-
+	      // console.log("response",response)
 	      $scope.response = response;
-
 	      $scope.$apply()
 	    }
 	});
 })
+}
 
-
-
-	}
-
+//find your location and
+function toggleBounce() {
+  if (current.getAnimation() !== null) {
+    current.setAnimation(null);
+  } else {
+    current.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
 //define the current position marker =========================
-marker = null;
-
-$scope.findLocation = (function(){
+$scope.findLocation = function(){
   navigator.geolocation.getCurrentPosition(function(position) {
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
-
-    console.log("position.coords.latitude",position.coords)
-    if (marker != null) {
+    if (current != null) {
       // Marker already created - Move it
-      marker.setPosition(newPoint);
+      current.setPosition(newPoint);
       $scope.map.setCenter(newPoint);
     }else{
-      marker = new google.maps.Marker({
+      current = new google.maps.Marker({
         icon: iconBase,
         position: newPoint,
         map: $scope.map,
         shape: shape,
-        title: 'Current Position'
+        title: 'Current location'
       });
        $scope.map.setCenter(newPoint);
-       marker.addListener('click', toggleBounce);
-      return newPoint;
-
+       current.addListener('click', toggleBounce);
     }
   // Center the map on the new position
   }); 
   // Call the autoUpdate() function every 1/10 seconds
-  setTimeout($scope.findLocation, 500);
-})
-
-
-var iconBase = {
-    url: '../img/arrow.png',
-    size: new google.maps.Size(30, 32),
-     origin: new google.maps.Point(0, 0),
-    // The anchor for this image is the base of the flagpole at (0, 32).
-    anchor: new google.maps.Point(0, 32)
-  };
-
-  var shape = {
-    coords: [1, 1, 1, 20, 18, 20, 18, 1],
-    type: 'poly'
-  };
-//find your location and
-function toggleBounce() {
-  if (marker.getAnimation() !== null) {
-    marker.setAnimation(null);
-  } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-  }
+  setTimeout($scope.findLocation, 100);
 }
+
 
 
 function showSteps(directionResult, markerArray, stepDisplay, map) {
@@ -157,7 +142,7 @@ function attachInstructionText(stepDisplay, marker, text, map) {
     // Open an info window when the marker is clicked on, containing the text
     // of the step.
     stepDisplay.setContent(text);
-    stepDisplay.open(map, marker);
+    stepDisplay.open($scope.map, marker);
   });
 }
 //Keep track of the current location of the user ====================
