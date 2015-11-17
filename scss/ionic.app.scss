@@ -44,11 +44,16 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	width:100%;
 	height:100%;
 }
+.gm .gm-iw .gm-sm{
+  z-index:9999999999;
+}
 .searchBox-top{
 	position:absolute;
 	width: 100%;
 	top: 20px;
 }
+
+
 .controls {
   margin-top: 10px;
   border: 1px solid transparent;
@@ -125,10 +130,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 #reloadBtn1{
     color: #fff;
     height: 50px;
-    top: 150px;
-    left: 15px;
+    top: 450px;
+    left: 150px;
     position: absolute;
-    z-index: 9999;
+    z-index: 99999999999;
 }
 #mode-selector {
   color: #fff;
