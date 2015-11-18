@@ -65,19 +65,18 @@ myapp.controller("mapController", function($scope,$timeout){
    		window.location.reload();
    	}
 //once routed reload to update the new current location==========================
-	$scope.calculateAndDisplayRoute = function(directionsService, directionsDisplay,markerArray, stepDisplay, map) {
-      var markerArray = [];
-     for (var i = 0; i < markerArray.length; i++) {
-            markerArray[i].setMap(null);
-      }
+	$scope.calculateAndDisplayRoute = function(directionsService, directionsDisplay, stepDisplay) {
+    // var markerArray = [];
     navigator.geolocation.getCurrentPosition(function(position) {
-          console.log("checking")
           var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                                 position.coords.longitude);
           // console.log(position.coords)
+       // for (var i = 0; i < markerArray.length; i++) {
+       //                markerArray[i].setMap(null);
+       //    }
+     
           $scope.coords = position.coords.latitude + "," + position.coords.longitude
           $scope.newCord = $scope.coords.toString();
-
         // console.log($scope.newCord)
 		var start = $scope.newCord;
 		var destination = $scope.end.value;
@@ -88,18 +87,12 @@ myapp.controller("mapController", function($scope,$timeout){
 	    	travelMode: google.maps.TravelMode.DRIVING
 	 }, function(response, status) {
 	    if (status === google.maps.DirectionsStatus.OK) {
-	      $scope.directionsDisplay.setDirections(response);
-	      showSteps(response, markerArray, stepDisplay, map);
 	      // console.log("response",response)
 	      $scope.response = response;
+        $scope.directionsDisplay.setDirections(response);
         $scope.$apply()
+
 	    }
-      // $scope.fireCheck = function(){
-      //   console.log("fired")
-      //   var timeout = directionsDisplay.setDirections(response);
-      //   setTimeout($scope.fireCheck, 1000);
-      // }
-      // $scope.fireCheck();
 	});
 
 })
@@ -118,18 +111,16 @@ myapp.controller("mapController", function($scope,$timeout){
 
 //define the current position marker =========================
 $scope.findLocation = function(map,newPoint){
-
   $scope.directionsDisplay.preserveViewport = true;
+  $scope.map.setZoom(19)
+  $scope.map.setTilt(45) 
 
-  setTimeout($scope.calculateAndDisplayRoute, 1000);
+  setTimeout($scope.calculateAndDisplayRoute, 500);
 
   navigator.geolocation.getCurrentPosition(function(position) {
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
-    $scope.map.setZoom(17)
-
-    $scope.map.setTilt(20) 
-
+   
 
     if (current != null) {
       // Marker already created - Move it
@@ -144,31 +135,30 @@ $scope.findLocation = function(map,newPoint){
         title: 'Current location'
       });
        $scope.map.setCenter(newPoint);
-
        $scope.map.panTo(current.getPosition());
        return newPoint;
     }
   // Center the map on the new position
   }); 
   // Call the autoUpdate() function every 1/10 seconds
-  setTimeout($scope.findLocation, 1000);
+  setTimeout($scope.findLocation, 500);
 
 }
 
 
-function showSteps(directionResult, markerArray, stepDisplay, map) {
-  // For each step, place a marker, and add the text to the marker's infowindow.
-  // Also attach the marker to an array so we can keep track of it and remove it
-  // when calculating new routes.
-  var myRoute = directionResult.routes[0].legs[0];
-  for (var i = 0; i < myRoute.steps.length; i++) {
-    var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
-    marker.setMap($scope.map);
-    marker.setPosition(myRoute.steps[i].start_location);
-    attachInstructionText(
-        stepDisplay, marker, myRoute.steps[i].instructions, map);
-  }
-}
+// function showSteps(directionResult, markerArray, stepDisplay, map) {
+//   // For each step, place a marker, and add the text to the marker's infowindow.
+//   // Also attach the marker to an array so we can keep track of it and remove it
+//   // when calculating new routes.
+//   var myRoute = directionResult.routes[0].legs[0];
+//   for (var i = 0; i < myRoute.steps.length; i++) {
+//     var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
+//     marker.setMap($scope.map);
+//     marker.setPosition(myRoute.steps[i].start_location);
+//     attachInstructionText(
+//         stepDisplay, marker, myRoute.steps[i].instructions, map);
+//   }
+// }
 
 function attachInstructionText(stepDisplay, marker, text, map) {
   google.maps.event.addListener(marker, 'click', function() {
