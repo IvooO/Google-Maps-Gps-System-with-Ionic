@@ -21,8 +21,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 [jsselect="legs[0].start_address"]{
-  position:absolute;
-  top:0;
+  position:relative;
   background:black;
   float:left;
 }
@@ -106,12 +105,11 @@ tbody{
     position: relative;
     width: 99%;
     background: white;
+    opacity: .8;
     top: 450px;
     z-index: 9999999;
     font-family: 'Roboto','sans-serif';
-    line-height: 30px;
-
-
+    /* line-height: 30px; */
 }
 //routing font
 .adp, .adp table {
@@ -150,7 +148,9 @@ tbody{
     position: absolute;
     z-index: 9999;
 }
-
+.adp-marker{
+  display:none;
+}
 #reloadBtn1 {
     color: #fff;
     height: 40px;
