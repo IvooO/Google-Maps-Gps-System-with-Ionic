@@ -20,7 +20,24 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-
+[jsselect="legs[0].start_address"]{
+  position:absolute;
+  top:0;
+  background:black;
+  float:left;
+}
+.adp-step, .adp-text {
+    width: 100%;
+    color: brown;
+    font-weight:bold;
+}
+tbody{
+  color:white;
+}
+.adp-directions{
+  background:black;
+  color:white;
+}
 .inputBackBtn{
   background-color:green;
   width:100px;

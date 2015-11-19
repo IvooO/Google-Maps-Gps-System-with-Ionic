@@ -9089,6 +9089,24 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+[jsselect="legs[0].start_address"] {
+  position: absolute;
+  top: 0;
+  background: black;
+  float: left; }
+
+.adp-step, .adp-text {
+  width: 100%;
+  color: brown;
+  font-weight: bold; }
+
+tbody {
+  color: white; }
+
+.adp-directions {
+  background: black;
+  color: white; }
+
 .inputBackBtn {
   background-color: green;
   width: 100px;

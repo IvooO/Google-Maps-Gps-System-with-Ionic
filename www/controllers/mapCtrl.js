@@ -44,6 +44,10 @@ myapp.controller("mapController", function($scope,$timeout){
 
   $scope.end.webkitSpeech = true;
 
+
+  $directionModel = $scope.directionsDisplay.panel;
+
+  console.log($scope.directionsDisplay.panel)
 //auto complete service on input fields  =====================
 	$scope.autocomplete = new google.maps.places.Autocomplete($scope.end);
 
@@ -112,15 +116,18 @@ myapp.controller("mapController", function($scope,$timeout){
 //define the current position marker =========================
 $scope.findLocation = function(map,newPoint){
   $scope.directionsDisplay.preserveViewport = true;
-  $scope.map.setZoom(19)
+  $scope.map.setZoom(20)
   $scope.map.setTilt(45) 
 
-  setTimeout($scope.calculateAndDisplayRoute, 500);
+  $timeout($scope.calculateAndDisplayRoute, 100);
 
   navigator.geolocation.getCurrentPosition(function(position) {
     var newPoint = new google.maps.LatLng(position.coords.latitude, 
                                           position.coords.longitude);
-   
+
+
+
+
 
     if (current != null) {
       // Marker already created - Move it
@@ -141,7 +148,7 @@ $scope.findLocation = function(map,newPoint){
   // Center the map on the new position
   }); 
   // Call the autoUpdate() function every 1/10 seconds
-  setTimeout($scope.findLocation, 500);
+  $timeout($scope.findLocation, 100);
 
 }
 
